@@ -1,0 +1,73 @@
+site_name: fhirground
+site_description: Grounded, validated FHIR R4 extraction from clinical notes
+site_url: https://danpalbcm.github.io/fhirground/
+repo_url: https://github.com/DanPalBCM/fhirground
+repo_name: DanPalBCM/fhirground
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: teal
+      toggle: {icon: material/weather-night, name: Switch to dark mode}
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: teal
+      toggle: {icon: material/weather-sunny, name: Switch to light mode}
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_source: true
+            show_root_heading: true
+            docstring_style: google
+            members_order: source
+            separate_signature: true
+            show_signature_annotations: true
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - tables
+  - toc: {permalink: true}
+  - pymdownx.highlight: {anchor_linenums: true}
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.details
+
+nav:
+  - Home: index.md
+  - Getting started: getting-started.md
+  - Design:
+      - Why two stages: design.md
+      - The mention schema: mention-schema.md
+      - Assertion and mapping rules: assertion-mapping.md
+      - Grounding: grounding.md
+      - Terminology and licensing: terminology.md
+      - Confidence and calibration: confidence.md
+      - Backends: backends.md
+      - Extensions reference: extensions.md
+      - Data formats: formats.md
+  - Guides:
+      - Evaluating with clinval: clinval.md
+      - The synthetic benchmark: benchmark.md
+      - PHI and security: phi.md
+  - Reference:
+      - API: api.md
+      - Decisions and deviations: decisions.md
+      - Changelog: changelog.md

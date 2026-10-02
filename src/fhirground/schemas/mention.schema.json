@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The complete model response: a list of mentions and nothing else.",
+  "properties": {
+    "mentions": {
+      "items": {
+        "additionalProperties": false,
+        "description": "One finding the model claims the note contains.",
+        "properties": {
+          "assertion": {
+            "description": "How the note asserts the finding.",
+            "enum": [
+              "present",
+              "negated",
+              "possible",
+              "historical",
+              "family",
+              "hypothetical"
+            ],
+            "type": "string"
+          },
+          "clinical_status_hint": {
+            "description": "An optional hint at FHIR ``Condition.clinicalStatus``.",
+            "enum": [
+              "active",
+              "resolved",
+              "inactive",
+              "remission",
+              null
+            ],
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "date_text": {
+            "description": "Date or relative phrase as written, e.g. '3 days ago'.",
+            "maxLength": 200,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dose_unit": {
+            "maxLength": 50,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dose_value": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "evidence": {
+            "description": "Verbatim quote copied from the note. Must appear in the note text.",
+            "maxLength": 300,
+            "minLength": 1,
+            "type": "string"
+          },
+          "frequency_text": {
+            "maxLength": 100,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "med_action": {
+            "description": "What the note says is being done with a medication.",
+            "enum": [
+              "start",
+              "continue",
+              "change",
+              "stop",
+              "mention",
+              null
+            ],
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mention_type": {
+            "description": "The three things v1 extracts.",
+            "enum": [
+              "condition",
+              "medication",
+              "observation"
+            ],
+            "type": "string"
+          },
+          "obs_category": {
+            "description": "FHIR observation category, restricted to the two v1 supports.",
+            "enum": [
+              "vital-signs",
+              "laboratory",
+              null
+            ],
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "onset_text": {
+            "description": "Onset as the note expresses it, e.g. 'since 2019'.",
+            "maxLength": 200,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "route": {
+            "maxLength": 50,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "text": {
+            "description": "The concept as the note expresses it, in plain language.",
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "value_comparator": {
+            "description": "FHIR ``Quantity.comparator`` values.",
+            "enum": [
+              "<",
+              "<=",
+              ">",
+              ">=",
+              null
+            ],
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value_number": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "value_text": {
+            "maxLength": 200,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value_unit": {
+            "maxLength": 50,
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "mention_type",
+          "text",
+          "evidence",
+          "assertion"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "mentions"
+  ],
+  "title": "MentionList",
+  "type": "object"
+}

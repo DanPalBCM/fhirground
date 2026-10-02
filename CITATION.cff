@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use fhirground in published work, please cite it as below."
+title: "fhirground: grounded, validated FHIR R4 extraction from clinical notes"
+abstract: >-
+  fhirground splits notes-to-FHIR extraction in two. Schema-constrained LLM
+  decoding produces simple, plain-language mentions, each with a verbatim
+  evidence quote and an assertion status; deterministic, tested code then
+  grounds each mention to character offsets, resolves codes through a pluggable
+  terminology layer, maps mentions to FHIR R4 Condition, MedicationRequest, and
+  Observation resources, validates them, and attaches per-resource confidence
+  and evidence extensions. The mention schema contains no code fields, so a
+  model cannot emit a medical code; every coding in the output comes from a
+  terminology resolver, enforced structurally and checked by a property test.
+type: software
+version: 1.0.0
+date-released: "2026-10-02"
+license: Apache-2.0
+repository-code: "https://github.com/DanPalBCM/fhirground"
+url: "https://github.com/DanPalBCM/fhirground"
+authors:
+  - family-names: Palacios
+    given-names: Daniel
+    affiliation: "Baylor College of Medicine"
+    email: daniel.palacios@bcm.edu
+keywords:
+  - FHIR
+  - clinical natural language processing
+  - large language models
+  - interoperability
+  - structured extraction
+  - terminology

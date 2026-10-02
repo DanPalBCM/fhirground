@@ -1,0 +1,144 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: test (py${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - run: uv python install ${{ matrix.python-version }}
+      - run: uv sync --all-extras
+      # Live-backend tests stay skipped: CI calls no model and no AWS.
+      - run: uv run pytest -q --cov=fhirground --cov-report=term-missing
+
+  lint:
+    name: lint and types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - run: uv sync --all-extras
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run mypy
+
+  schema:
+    name: decoding schema is in sync
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync
+      # The checked-in mention.schema.json is the artifact backends decode
+      # against. It must not drift from the Pydantic source.
+      - run: uv run fhirground schema --check
+
+  demo:
+    name: demo runs end to end
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - run: uv sync
+      # The demo is the project's own acceptance test: it exits non-zero if the
+      # schema accepts a code field, if any evidence offset disagrees with its
+      # quote, or if any emitted code is not in a value set.
+      - run: uv run python demo.py
+      - name: Check the outputs exist
+        run: |
+          test -s demo_output/run_summary.json
+          test -s demo_output/clinval_predictions.jsonl
+          test -s demo_output/debug.jsonl
+          test -s demo_output/score.json
+          test -d demo_output/bundles
+      - name: Every emitted resource is valid FHIR
+        run: uv run fhirground validate demo_output/bundles
+      - uses: actions/upload-artifact@v4
+        with:
+          name: demo-output
+          path: demo_output/
+          retention-days: 14
+
+  interop:
+    name: clinval reads our output
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync
+      - run: uv run python demo.py
+      # The sibling project must be able to consume clinval_predictions.jsonl
+      # with no translation step. Checking the contract rather than asserting it.
+      - name: Validate the clinval contract
+        run: |
+          uv run python - <<'PY'
+          import json, pathlib
+          rows = [json.loads(l) for l in
+                  pathlib.Path("demo_output/clinval_predictions.jsonl").read_text().splitlines()
+                  if l.strip()]
+          assert rows, "no clinval predictions written"
+          for r in rows:
+              assert {"system", "note_id", "label", "value"} <= set(r), r
+              assert isinstance(r["value"], bool)
+              assert ":" in r["label"], f"label must be <ResourceType>:<code>: {r['label']}"
+              assert r["run"]["call_id"] == r["note_id"], "one model call per note"
+              if "span" in r:
+                  assert r["span"]["start"] <= r["span"]["end"]
+          print(f"clinval contract OK over {len(rows)} predictions")
+          PY
+
+  no-real-data:
+    name: no patient data committed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync
+      # Structural guard: identifiers must be sequential placeholders and note
+      # text must come from the declared concept banks.
+      - run: uv run pytest tests/test_synth.py -q -k "NoRealData or GoldCorrectness"
+      - name: Fail on data files outside the synthetic directories
+        run: |
+          stray=$(git ls-files \
+            | grep -E '\.(csv|jsonl|ndjson|parquet|feather|dta|sav|xpt|xlsx|sas7bdat|sqlite)$' \
+            | grep -vE '^(examples/data/|tests/fixtures/|docs/benchmarks/)' || true)
+          if [ -n "$stray" ]; then
+            echo "Data files found outside the allowed synthetic directories:"
+            echo "$stray"
+            exit 1
+          fi
+          echo "No data files outside examples/data/, tests/fixtures/, docs/benchmarks/."
+      - name: Fail if a cache file was committed
+        run: |
+          # Both caches contain note-derived text. See docs/decisions.md D-012.
+          stray=$(git ls-files | grep -E '\.sqlite$|llm_cache|rxnav.*\.sqlite' || true)
+          if [ -n "$stray" ]; then
+            echo "Cache files contain note text and must not be committed:"
+            echo "$stray"
+            exit 1
+          fi
+          echo "No cache files committed."

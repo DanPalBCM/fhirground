@@ -1,0 +1,418 @@
+{
+  "generator": "fhirground.synth",
+  "source": "generated",
+  "synthea_version_documented": "3.3.0",
+  "n_notes": 25,
+  "seed": 0,
+  "inject_distractors": true,
+  "n_gold_resources": 164,
+  "gold_counts": {
+    "Condition": 48,
+    "MedicationRequest": 49,
+    "Observation": 67
+  },
+  "distractors": [
+    {
+      "note_id": "synth-note-00001",
+      "text": "Chronic kidney disease",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00001",
+      "text": "Depression",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00002",
+      "text": "Hypertension",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00002",
+      "text": "Hypothyroidism",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00002",
+      "text": "Chronic kidney disease",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00003",
+      "text": "Hyperlipidemia",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00003",
+      "text": "Hypertension",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00003",
+      "text": "Hypertension",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00004",
+      "text": "Type 2 diabetes mellitus",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00004",
+      "text": "Obesity",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00005",
+      "text": "Hypertension",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00005",
+      "text": "Asthma",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00006",
+      "text": "Depression",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00006",
+      "text": "Asthma",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00006",
+      "text": "Chronic kidney disease",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00007",
+      "text": "Depression",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00007",
+      "text": "Hypothyroidism",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00008",
+      "text": "Chronic kidney disease",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00008",
+      "text": "Chronic kidney disease",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00008",
+      "text": "Asthma",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00009",
+      "text": "Hypertension",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00009",
+      "text": "Asthma",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00009",
+      "text": "Depression",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00010",
+      "text": "Asthma",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00010",
+      "text": "Asthma",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00010",
+      "text": "Depression",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00011",
+      "text": "Depression",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00011",
+      "text": "Asthma",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00011",
+      "text": "Hypertension",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00012",
+      "text": "Hyperlipidemia",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00012",
+      "text": "Depression",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00013",
+      "text": "Hypertension",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00013",
+      "text": "Depression",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00013",
+      "text": "Hypertension",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00014",
+      "text": "Asthma",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00014",
+      "text": "Obesity",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00014",
+      "text": "Hyperlipidemia",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00015",
+      "text": "Depression",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00015",
+      "text": "Depression",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00015",
+      "text": "Obesity",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00016",
+      "text": "Chronic kidney disease",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00016",
+      "text": "Depression",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00016",
+      "text": "Hyperlipidemia",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00017",
+      "text": "Hypertension",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00017",
+      "text": "Type 2 diabetes mellitus",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00017",
+      "text": "Hypertension",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00018",
+      "text": "Chronic kidney disease",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00018",
+      "text": "Hypertension",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00019",
+      "text": "Hypothyroidism",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00019",
+      "text": "Obesity",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00020",
+      "text": "Hyperlipidemia",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00020",
+      "text": "Chronic kidney disease",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00020",
+      "text": "Asthma",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00021",
+      "text": "Depression",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00021",
+      "text": "Hyperlipidemia",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00021",
+      "text": "Hypothyroidism",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00022",
+      "text": "Hypothyroidism",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00022",
+      "text": "Hypothyroidism",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00023",
+      "text": "Asthma",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00023",
+      "text": "Hypertension",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00023",
+      "text": "Asthma",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00024",
+      "text": "Type 2 diabetes mellitus",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00024",
+      "text": "Chronic kidney disease",
+      "expect": "dropped",
+      "kind": "family"
+    },
+    {
+      "note_id": "synth-note-00025",
+      "text": "Chronic kidney disease",
+      "expect": "provisional",
+      "kind": "hedged"
+    },
+    {
+      "note_id": "synth-note-00025",
+      "text": "Depression",
+      "expect": "dropped",
+      "kind": "negated"
+    },
+    {
+      "note_id": "synth-note-00025",
+      "text": "Hypertension",
+      "expect": "dropped",
+      "kind": "family"
+    }
+  ],
+  "banks": {
+    "conditions": 8,
+    "medications": 7,
+    "observations": 7
+  },
+  "note": "Every artifact here is synthetic. No real patient record was involved. Gold resources are generated from the same source records the notes were rendered from, so the benchmark is exact by construction."
+}
