@@ -41,7 +41,12 @@ DATA = Path(__file__).parent / "examples" / "data"
 OUT = Path(__file__).parent / "demo_output"
 
 GREEN, YELLOW, RED, DIM, BOLD, RESET = (
-    "\033[32m", "\033[33m", "\033[31m", "\033[2m", "\033[1m", "\033[0m"
+    "\033[32m",
+    "\033[33m",
+    "\033[31m",
+    "\033[2m",
+    "\033[1m",
+    "\033[0m",
 )
 if not sys.stdout.isatty():
     GREEN = YELLOW = RED = DIM = BOLD = RESET = ""
@@ -245,9 +250,7 @@ def main() -> int:
     predicted = [
         r for result in results for r in result.resources if r["resourceType"] != "Provenance"
     ]
-    report = score_resources(
-        predicted, gold, MatchSpec(), drop_reasons=drops
-    )
+    report = score_resources(predicted, gold, MatchSpec(), drop_reasons=drops)
     (OUT / "score.json").write_text(json.dumps(report.as_dict(), indent=2))
 
     print()
@@ -277,8 +280,10 @@ def main() -> int:
     sample = sorted((OUT / "bundles").glob("*.json"))[:1]
     if sample:
         print(f"\nLook at {BOLD}{sample[0].relative_to(Path.cwd())}{RESET} for a full Bundle,")
-        print(f"or {BOLD}{(OUT / 'debug.jsonl').relative_to(Path.cwd())}{RESET} "
-              "for one trace per mention.")
+        print(
+            f"or {BOLD}{(OUT / 'debug.jsonl').relative_to(Path.cwd())}{RESET} "
+            "for one trace per mention."
+        )
     return 0
 
 
