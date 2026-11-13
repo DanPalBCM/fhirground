@@ -15,6 +15,7 @@ type: software
 version: 1.0.0
 date-released: "2026-11-13"
 license: Apache-2.0
+doi: "10.5281/zenodo.24203616"
 repository-code: "https://github.com/DanPalBCM/fhirground"
 url: "https://github.com/DanPalBCM/fhirground"
 authors:
@@ -22,6 +23,13 @@ authors:
     given-names: Daniel
     affiliation: "Baylor College of Medicine"
     email: danielpalaciosusa2015@hotmail.com
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24203616"
+    description: "Concept DOI for all versions (Zenodo)"
+  - type: doi
+    value: "10.5281/zenodo.24203617"
+    description: "DOI for v1.0.0 (Zenodo)"
 keywords:
   - FHIR
   - clinical natural language processing

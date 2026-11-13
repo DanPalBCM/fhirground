@@ -6,6 +6,7 @@
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/downloads/)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-green)](https://github.com/DanPalBCM/fhirground/blob/main/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/fhirground)](https://pypi.org/project/fhirground/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24203616.svg)](https://doi.org/10.5281/zenodo.24203616)
 
 Health systems want structured data from clinical notes, and the format is
 increasingly FHIR. The existing options each fail differently:
@@ -354,7 +355,8 @@ See [`CITATION.cff`](https://github.com/DanPalBCM/fhirground/blob/main/CITATION.
   title   = {fhirground: grounded, validated FHIR R4 extraction from clinical notes},
   version = {1.0.0},
   year    = {2026},
-  url     = {https://github.com/DanPalBCM/fhirground}
+  doi     = {10.5281/zenodo.24203616},
+  url     = {https://doi.org/10.5281/zenodo.24203616}
 }
 ```
 
