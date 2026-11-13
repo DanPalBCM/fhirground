@@ -9,7 +9,7 @@ description = "Grounded, validated FHIR R4 extraction from clinical notes: the L
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
-authors = [{ name = "Daniel Palacios", email = "daniel.palacios@bcm.edu" }]
+authors = [{ name = "Daniel Palacios", email = "danielpalaciosusa2015@hotmail.com" }]
 keywords = [
     "fhir",
     "clinical-nlp",
@@ -52,6 +52,8 @@ all = ["boto3>=1.34", "scikit-learn>=1.4", "numpy>=1.26"]
 Homepage = "https://github.com/DanPalBCM/fhirground"
 Repository = "https://github.com/DanPalBCM/fhirground"
 Issues = "https://github.com/DanPalBCM/fhirground/issues"
+Changelog = "https://github.com/DanPalBCM/fhirground/blob/main/CHANGELOG.md"
+Documentation = "https://danpalbcm.github.io/fhirground/"
 
 [project.scripts]
 fhirground = "fhirground.cli:app"

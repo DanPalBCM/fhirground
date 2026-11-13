@@ -4,7 +4,8 @@
 
 [![tests](https://github.com/DanPalBCM/fhirground/actions/workflows/ci.yml/badge.svg)](https://github.com/DanPalBCM/fhirground/actions/workflows/ci.yml)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/downloads/)
-[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-green)](LICENSE)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-green)](https://github.com/DanPalBCM/fhirground/blob/main/LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/fhirground)](https://pypi.org/project/fhirground/)
 
 Health systems want structured data from clinical notes, and the format is
 increasingly FHIR. The existing options each fail differently:
@@ -75,6 +76,18 @@ quoted verbatim from the StructureDefinitions.
 never emitted as affirmed facts.
 
 ---
+
+## Install
+
+```bash
+pip install fhirground               # core
+pip install "fhirground[bedrock]"    # plus the AWS Bedrock backend
+pip install "fhirground[calibrate]"  # plus confidence calibration
+pip install "fhirground[all]"        # everything
+```
+
+Python 3.11 or newer. Installing the package also installs the `fhirground`
+command; run `fhirground --help` to list the subcommands.
 
 ## Quickstart
 
@@ -163,7 +176,7 @@ family    hypertension
 `clinicalStatus` is **absent**, not defaulted to `active`. FHIR invariant
 con-3 only requires it when `category` is `problem-list-item`, which
 fhirground omits by default — so guessing a clinical course the note never
-stated would be fabrication. See [`docs/decisions.md`](docs/decisions.md) D-005.
+stated would be fabrication. See [`docs/decisions.md`](https://github.com/DanPalBCM/fhirground/blob/main/docs/decisions.md) D-005.
 
 This example is a test (`tests/test_pipeline.py::TestSpecExample`).
 
@@ -242,7 +255,7 @@ worse than useless.
   fhirground uses the **R4B** models because R4 models exist only in a
   pydantic-v1-only release line; for these three resource types the two are
   field-identical, which was measured rather than assumed
-  ([D-002](docs/decisions.md)).
+  ([D-002](https://github.com/DanPalBCM/fhirground/blob/main/docs/decisions.md)).
 - **Uncalibrated confidence is not a probability.** It is a weighted mean of
   heuristics. Every resource records whether it was calibrated; fit a
   calibrator on labelled data to make the number mean something.
@@ -257,7 +270,7 @@ worse than useless.
 - **The LLM-call cache contains note text**, because the prompt does. It is off
   by default. So does the optional RxNav cache, which additionally **sends
   medication text to a third party** — opt-in only
-  ([D-012, D-013](docs/decisions.md)).
+  ([D-012, D-013](https://github.com/DanPalBCM/fhirground/blob/main/docs/decisions.md)).
 
 ---
 
@@ -283,7 +296,7 @@ worse than useless.
 Outputs: `bundles/<note_id>.json`, `ndjson/<Type>.ndjson`,
 `clinval_predictions.jsonl`, `debug.jsonl`, `run_summary.json`.
 
-Full reference: [`docs/formats.md`](docs/formats.md). Inspect the decoding
+Full reference: [`docs/formats.md`](https://github.com/DanPalBCM/fhirground/blob/main/docs/formats.md). Inspect the decoding
 schema with `fhirground schema --print`.
 
 ---
@@ -298,9 +311,9 @@ construction.
 
 Synthea is **not** run: it is a Java program and this environment has no JVM,
 so records are generated internally instead and
-[`scripts/regenerate_synthea.sh`](scripts/regenerate_synthea.sh) documents the
+[`scripts/regenerate_synthea.sh`](https://github.com/DanPalBCM/fhirground/blob/main/scripts/regenerate_synthea.sh) documents the
 pinned version and arguments for anyone who wants the Synthea path
-([D-006](docs/decisions.md)).
+([D-006](https://github.com/DanPalBCM/fhirground/blob/main/docs/decisions.md)).
 
 No test makes a network call. Live-backend tests are marked and skipped unless
 their environment variable is set.
@@ -311,7 +324,7 @@ their environment variable is set.
 
 ```bash
 uv sync --all-extras
-uv run pytest                 # 618 tests, 95% coverage
+uv run pytest                 # 626 tests, 95% coverage
 uv run pytest --cov=fhirground --cov-report=term-missing
 uv run ruff check . && uv run ruff format --check .
 uv run mypy
@@ -326,14 +339,14 @@ the real mention schema, with Bedrock additionally validated by botocore's
 
 Every decision that departs from the specification, resolves an ambiguity, or
 rests on something verified about an external library is recorded in
-[`docs/decisions.md`](docs/decisions.md) — including four bugs that tests
+[`docs/decisions.md`](https://github.com/DanPalBCM/fhirground/blob/main/docs/decisions.md) — including four bugs that tests
 caught and what they were.
 
 ---
 
 ## Citing
 
-See [`CITATION.cff`](CITATION.cff).
+See [`CITATION.cff`](https://github.com/DanPalBCM/fhirground/blob/main/CITATION.cff).
 
 ```bibtex
 @software{fhirground,
@@ -347,7 +360,7 @@ See [`CITATION.cff`](CITATION.cff).
 
 ## License
 
-[Apache-2.0](LICENSE). Chosen for the patent grant and health-enterprise
+[Apache-2.0](https://github.com/DanPalBCM/fhirground/blob/main/LICENSE). Chosen for the patent grant and health-enterprise
 acceptability, matching Synthea and much of the FHIR Python ecosystem.
 Terminology content is never bundled beyond synthetic fixtures; see
-[`docs/terminology.md`](docs/terminology.md) for third-party licensing notes.
+[`docs/terminology.md`](https://github.com/DanPalBCM/fhirground/blob/main/docs/terminology.md) for third-party licensing notes.

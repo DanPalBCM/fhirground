@@ -473,3 +473,19 @@ locally. **Not** published to PyPI and no documentation site deployed, so
 §11's "published to PyPI, docs deployed" items are deferred rather than met.
 Nothing about the package blocks either step; a PyPI name and version are
 effectively permanent, so that call is left to a deliberate later decision.
+
+---
+
+## D-022 — Release scope revised: PyPI and Zenodo
+
+**Status:** decided by the project owner, 13 November 2026. Supersedes D-021.
+
+v1.0.0 is published to PyPI from `.github/workflows/release.yml` using
+Trusted Publishing (OIDC), so no API token exists to leak. Publishing a GitHub
+Release publishes to PyPI, and the GitHub–Zenodo integration archives the same
+release and mints a DOI; a manual run of the workflow only builds and checks the
+distributions. The build job refuses to publish if the release tag differs from
+the `pyproject.toml` version, because a PyPI version can never be re-uploaded.
+The documentation is deployed to GitHub Pages by `.github/workflows/docs.yml`.
+The author contact email moved to a personal address, and the `v1.0.0` tag was
+moved to the release commit before any release or upload had used it.

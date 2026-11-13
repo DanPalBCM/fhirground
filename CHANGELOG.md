@@ -4,7 +4,7 @@ All notable changes to fhirground are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versioning
 follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] — 2026-10-02
+## [1.0.0] — 2026-11-13
 
 First release.
 
@@ -113,7 +113,7 @@ First release.
 
 **Project**
 
-- 618 tests at 95% coverage; ≥90% on grounding, assertion, mapping, validate,
+- 626 tests at 95% coverage; ≥90% on grounding, assertion, mapping, validate,
   and confidence as §8.5 requires.
 - `demo.py`, which is also an acceptance test: it exits non-zero if the schema
   accepts a code field, if any evidence offset disagrees with its quote, or if
@@ -134,6 +134,5 @@ First release.
   environment lacks. `scripts/regenerate_synthea.sh` documents the path.
 - No live-backend benchmark artifact is committed; the committed `score.json`
   is from the mock backend and labelled as such.
-- Not published to PyPI and no documentation site deployed.
 
 [1.0.0]: https://github.com/DanPalBCM/fhirground/releases/tag/v1.0.0

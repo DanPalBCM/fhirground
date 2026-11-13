@@ -13,7 +13,7 @@ abstract: >-
   terminology resolver, enforced structurally and checked by a property test.
 type: software
 version: 1.0.0
-date-released: "2026-10-02"
+date-released: "2026-11-13"
 license: Apache-2.0
 repository-code: "https://github.com/DanPalBCM/fhirground"
 url: "https://github.com/DanPalBCM/fhirground"
@@ -21,7 +21,7 @@ authors:
   - family-names: Palacios
     given-names: Daniel
     affiliation: "Baylor College of Medicine"
-    email: daniel.palacios@bcm.edu
+    email: danielpalaciosusa2015@hotmail.com
 keywords:
   - FHIR
   - clinical natural language processing
